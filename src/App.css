@@ -7,7 +7,51 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root, #root > *:only-child {
+  width: 100vw;
+  height: 100vh;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+}
+
+.home .exercises {
+  width: 100%;
+  height: calc(100% - 3rem);
+  overflow: scroll;
+}
+
+.exercise.card {
+  width: calc(100% - 2rem);
+  height: 50%;
+  margin: 1rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  background: cornflowerblue;
+  color: midnightblue;
+}
+
+.exercise.card .title {
+  font: 2rem sans-serif;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.home .footer {
+  height: 3rem;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: midnightblue 0px -2px 5px 1px;
+}
+
+#new {
+  text-decoration: none;
+  color: white;
+  background: midnightblue;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
 }
