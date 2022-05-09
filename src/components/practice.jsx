@@ -7,18 +7,20 @@ export default function Practice ({ workoutlog }) {
     {last.exercises.map(exercise => <div key={exercise.name} className={`exercise card ${exercise.name}`}>
       <div className='title'>{exercise.name.replace('_', ' ')}</div>
       <div className='last-time'>
-        <div className='last-time-title'>Last Time</div>
-        <div className='goal'>Goal: {exercise.goal.toString()}</div>
-        <div className='performed'>Performed: {exercise.performed.toString()}</div>
+        <div className='sub-title'>Last Time</div>
+        <div className='data goal'>You tried:</div><div className='data goal'>{exercise.goal.toString()}</div>
+        <div className='data performed'>and did:</div><div className='data performed  '>{exercise.performed.toString()}</div>
       </div>
       <div className='this-time'>
-        <div className='last-time-title'>This Time</div>
-        <div className='goal'>Goal: {exercise.goal.toString()}</div>
-        <div className='performed'>
-          Performed:
-          <input type="text" />
-          <button className="success">I did it!</button>
-          <button className="redo">I need to repeat this...</button>
+        <div className='sub-title'>This Time</div>
+        <div className='data goal'>Try:</div><div className='data goal'>{exercise.goal.toString()}</div>
+        <div className='data performed'>and then write how you did:</div>
+        <div className='form'>
+          <input type="text" placeholder="how did you do?" />
+          <div className='buttons'>
+            <button className="success primary small button">I did it!</button>
+            <button className="redo small button">I need a do-over</button>
+          </div>
         </div>
       </div>
     </div>)}

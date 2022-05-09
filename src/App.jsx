@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import WorkoutLog from './workoutlog.js'
 
 import Home from './components/home'
+import Stats from './components/stats'
 import Practice from './components/practice'
 
 import './App.css'
@@ -25,6 +26,7 @@ function App() {
   return <Router>
     <Routes>
       <Route path='/new' element={<Practice workoutlog={log} />} />
+      <Route path='/stats' element={<Stats workoutlog={log} />} />
       <Route path='/' element={<Home workoutlog={log} />} />
     </Routes>
   </Router>

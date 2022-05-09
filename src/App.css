@@ -1,23 +1,51 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap');
+
+body { margin: 0; }
 
 #root, #root > *:only-child {
   width: 100vw;
   height: 100vh;
+  background: #fedbc7;
+  overflow-y: scroll;
 }
 
 .home {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.home .exercises {
+
+.home > img {
+  width: 10rem;
+  aspect-ratio: 1;
+}
+
+.home > .title {
+  margin-bottom: 10vh;
+}
+
+.practice .card .last-time, .practice .card  .this-time {
+  display: grid;
+  grid-template: auto / auto auto;
+  margin-bottom: 1rem;
+}
+
+.practice .card .last-time .sub-title, .practice .card  .this-time .sub-title, .practice .card .this-time .form, .practice .card .this-time .data.performed {
+  grid-column: 1 / 3;
+}
+
+.practice .card .this-time .form input {
+  margin-bottom: 1rem;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats .exercises {
   width: 100%;
   height: calc(100% - 3rem);
   overflow: scroll;
@@ -29,29 +57,98 @@ body {
   margin: 1rem;
   padding: 0.5rem;
   box-sizing: border-box;
-  background: cornflowerblue;
-  color: midnightblue;
+  border: #663300 1px solid;
+  color: #663300;
 }
 
 .exercise.card .title {
-  font: 2rem sans-serif;
+  text-transform: uppercase;
   text-align: center;
   margin: 0.5rem 0;
 }
 
-.home .footer {
+.stats .footer {
   height: 3rem;
   background: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: midnightblue 0px -2px 5px 1px;
+  box-shadow: #663300 0px -2px 5px 1px;
 }
 
-#new {
+.title {
+  font: bold 2rem 'Cutive Mono';
+  color: #663300;
+}
+
+.sub-title {
+  font: bold 1.5rem 'Cutive Mono';
+  color: #663300;
+}
+
+.data {
+  font: bold 1rem 'Cutive Mono';
+  color: #663300;
+}
+
+.button {
+  font: bold 1.5rem 'Cutive Mono';
   text-decoration: none;
-  color: white;
-  background: midnightblue;
   padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  min-width: 10em;
+  box-sizing: border-box;
   border-radius: 0.5rem;
+  background: #fedbc7;
+  border: #663300 2px solid;
+  color: #663300;
+  text-align: center;
+  font-weight: bold;
+}
+
+.button.primary {
+  color: #fedbc7;
+  background: #663300;
+  border: none;
+}
+
+.button.small {
+  font-size: 1rem;
+}
+
+.buttons {
+  display: flex;
+}
+
+.buttons .button:not(:last-child) {
+  margin-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.buttons .button:not(:first-child) {
+  margin-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+input[type="text"] {
+  font: 1rem 'Cutive Mono';
+  text-decoration: none;
+  box-sizing: border-box;
+  background: #fedbc7;
+  border-bottom: #663300 2px solid;
+  color: #663300;
+  font-weight: bold;
+  outline: none;
+  box-shadow: none;
+  inset: none;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+
+input[type="text"]::placeholder {
+  color: #663300;
+  opacity: 0.5;
 }
