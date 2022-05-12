@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
-import WorkoutLog from './workoutlog.js'
+
+import WorkoutLog from './workoutlog'
 
 import Home from './components/home'
 import Stats from './components/stats'
@@ -10,16 +11,15 @@ import Practice from './components/practice'
 import './App.css'
 
 function App() {
-  const [log, setLog] = useState(new WorkoutLog())
-  const [data, setData] = useState(false)
+  const [log, setLog] = useState(false)
 
   useEffect(() => {
     (async () => {
-      setData(await log.init())
+      setLog(await WorkoutLog.load('https://script.google.com/macros/s/AKfycbxCyQ-OIU114uW4YTGdfP4vpYKp_nSMnmS3RWjSvxKtP9cWV8_ClDn4A-wQ6fQj_udB/exec'))
     })()
-  }, [log])
+  }, [])
 
-  if (!log || !data || !log.data) {
+  if (!log) {
     return <div className='loading' />
   }
 
