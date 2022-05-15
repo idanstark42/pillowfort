@@ -41,17 +41,12 @@ body { margin: 0; }
 }
 
 .stats {
-  display: flex;
-  flex-direction: column;
-}
-
-.stats .exercises {
   width: 100%;
-  height: calc(100% - 3rem);
+  height: 100%;
   overflow: scroll;
 }
 
-.exercise.card {
+.card {
   width: calc(100% - 2rem);
   height: 50%;
   margin: 1rem;
@@ -61,7 +56,7 @@ body { margin: 0; }
   color: #663300;
 }
 
-.exercise.card .title {
+.card .title {
   text-transform: uppercase;
   text-align: center;
   margin: 0.5rem 0;
