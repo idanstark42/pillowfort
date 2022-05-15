@@ -1,4 +1,5 @@
 const HTTP_OPTIONS = {
+  method: 'get',
   redirect: 'follow',
   mode: 'cors',
   dataType: 'jsonp',
@@ -7,11 +8,16 @@ const HTTP_OPTIONS = {
 }
 
 export async function loadFromGoogleSheet (url) {
-  const response = await fetch(url, { ...HTTP_OPTIONS, method: 'GET' })
+  const response = await action(url, 'load')
   return await response.json()
 }
 
 export async function saveToGoogleSheet (url, entry) {
-  const response = await fetch(url, { ...HTTP_OPTIONS, method: 'POST', body: JSON.stringify(entry) })
+  const response = await action(url, 'add', { date: entry.date, exercises: JSON.stringify(entry.exercises) })
   return await response.json()
+}
+
+async function action (url, action, params = {}) {
+  const fullUrl = `${url}?${Object.entries({ ...params, action }).map(([key, value]) => `${key}=${value}`).join('&')}`
+  return await fetch(fullUrl, HTTP_OPTIONS)
 }

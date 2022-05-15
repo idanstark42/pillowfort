@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      setLog(await WorkoutLog.load('https://script.google.com/macros/s/AKfycbxCyQ-OIU114uW4YTGdfP4vpYKp_nSMnmS3RWjSvxKtP9cWV8_ClDn4A-wQ6fQj_udB/exec'))
+      setLog(await WorkoutLog.load('https://script.google.com/macros/s/AKfycbxKkrUydtzdX-A-Lfh-3kcH29HIcvAdBFznU14qdSaI9MLlYbx-3fA7TJ3HxhmJl5D3/exec'))
     })()
   }, [])
 
