@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { ResponsiveContainer, Text, AreaChart, XAxis, YAxis, Area } from 'recharts'
-import { Link } from 'react-router-dom'
 
 import { useForceUpdate } from './force-update-hook'
 
