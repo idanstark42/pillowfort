@@ -21,8 +21,8 @@ export default class SetsExercise extends BasicExercise {
     if (div === Math.round(div)) {
       numbers = Array(this.sets).fill(div)
     } else {
-      const upperValue = Math.ceil(value)
-      const lowerValue = Math.floor(value)
+      const upperValue = Math.ceil(div)
+      const lowerValue = Math.floor(div)
       const upperValueReps = value - this.sets * lowerValue
       const lowerValueReps = this.sets - upperValueReps
 

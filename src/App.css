@@ -26,6 +26,16 @@ body { margin: 0; }
   margin-bottom: 10vh;
 }
 
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.practice .card {
+  height: 80%;
+}
+
 .practice .card .last-time, .practice .card  .this-time {
   display: grid;
   grid-template: auto / auto auto;
@@ -101,10 +111,20 @@ body { margin: 0; }
   font-weight: bold;
 }
 
+.button.disabled {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
 .button.primary {
   color: #fedbc7;
   background: #663300;
   border: none;
+}
+
+.button.link {
+  border: none;
+  text-decoration: underline;
 }
 
 .button.small {

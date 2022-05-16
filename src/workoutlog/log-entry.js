@@ -4,20 +4,28 @@ export default class LogEntry {
   }
 
   next () {
-    const date = (new Date()).toLocaleDateString('en-GB')
+    const date = (new Date()).toLocaleDateString('en-GB').replace('/', '.')
     return new LogEntry(date, this.exerciseEntries.map(exerciseEntry => exerciseEntry.next()))
   }
 
-  perform (exercise, performence) {
-    this.exerciseEntries.find(exEntry => exEntry.exercise.name === exercise).perform(performence)
+  perform (exercise, performance) {
+    this.exerciseEntries.find(exEntry => exEntry.exercise.name === exercise).perform(performance)
   }
 
   goal (exercise) {
-    return this.exerciseEntries.find(exEntry => exEntry.exercise.name === exercise).goal
+    return this.get(exercise, 'goal')
   }
 
-  performence (exercise) {
-    return this.exerciseEntries.find(exEntry => exEntry.exercise.name === exercise).performence
+  performance (exercise) {
+    return this.get(exercise, 'performance')
+  }
+
+  progression (exercise) {
+    return this.get(exercise, 'progression')
+  }
+
+  get (exercise, prop) {
+    return this.exerciseEntries.find(exEntry => exEntry.exercise.name === exercise)[prop]
   }
 
   toJson () {

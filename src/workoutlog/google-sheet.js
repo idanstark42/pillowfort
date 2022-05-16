@@ -7,6 +7,11 @@ const HTTP_OPTIONS = {
   headers: { 'Content-Type': 'text/plain; charset=UTF-8' }
 }
 
+export async function pingGoogleSheet (url) {
+  const response = await action(url, 'ping')
+  return await response.json()
+}
+
 export async function loadFromGoogleSheet (url) {
   const response = await action(url, 'load')
   return await response.json()
