@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { ResponsiveContainer, BarChart, Bar, AreaChart, XAxis, YAxis, Area } from 'recharts'
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis } from 'recharts'
 import { useNavigate } from 'react-router'
 import { useLog, REQUIRES_LOGIN } from './log-context'
 
