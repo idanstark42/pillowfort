@@ -7,28 +7,21 @@ export default function Stats () {
   const { log } = useLog()
   const navigate = useNavigate()
   const [attendanceData, setAddendenceData] = useState()
-  const [graphsData, setGraphsData] = useState()
   useEffect(() => {
-    if (log === REQUIRES_LOGIN) {
-      navigate('/')
-    } else {
-      setAddendenceData(log.entries.map(entry => entry.date).filter(Boolean).reduce((months, date) => {
-        const monthStr = date.substr(date.indexOf('.') + 1)
-        let monthEntry = months.find(month => month.month === monthStr)
-        if (!monthEntry) {
-          monthEntry = { month: monthStr, attendance: 0 }
-          months.push(monthEntry)
-        }
-        monthEntry.attendance = monthEntry.attendance + 1
-        return months
-      }, []))
+    if (log === REQUIRES_LOGIN)
+      return navigate('/')
 
-      setGraphsData(log.entries
-    .map(entry => entry.exerciseEntries.reduce((datum, exEntry) => {
-      return Object.assign(datum, { [exEntry.exercise.name]: exEntry.exercise.toNumber(exEntry.performance) })
-    }, { name: entry.date }))
-    .filter(({ name }) => name !== 'Invalid date'))
-    }
+    setAddendenceData(log.entries.map(entry => entry.date).filter(Boolean).reduce((months, date) => {
+      const monthStr = date.substr(date.indexOf('.') + 1)
+      let monthEntry = months.find(month => month.month === monthStr)
+      if (!monthEntry) {
+        monthEntry = { month: monthStr, attendance: 0 }
+        months.push(monthEntry)
+      }
+      monthEntry.attendance = monthEntry.attendance + 1
+      return months
+    }, []))
+
   }, [log, navigate, setAddendenceData])
 
   if (log === REQUIRES_LOGIN) {
@@ -46,14 +39,5 @@ export default function Stats () {
         </BarChart>
       </ResponsiveContainer>
     </div>
-    {log.exercises.map(exercise => <div id={exercise.name} key={exercise.name} className='exercise card'>
-      <div className='title'>{exercise.name}</div>
-      <ResponsiveContainer width='100%' height='80%'>
-        <AreaChart data={graphsData} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>
-          <Area dataKey={exercise.name} fill="#663300" stroke="#663300" />
-          <XAxis dataKey='name' stroke="#663300"/>
-        </AreaChart>
-      </ResponsiveContainer>
-    </div>)}
   </div>
 }

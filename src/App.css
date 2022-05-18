@@ -33,21 +33,35 @@ body { margin: 0; }
 }
 
 .practice .card {
-  height: 80%;
+  height: unset;
 }
 
 .practice .card .last-time, .practice .card  .this-time {
   display: grid;
   grid-template: auto / auto auto;
+}
+
+.practice .card .last-time {
   margin-bottom: 1rem;
 }
 
-.practice .card .last-time .sub-title, .practice .card  .this-time .sub-title, .practice .card .this-time .form, .practice .card .this-time .data.performed {
+.practice .card .sub-title,
+.practice .card .this-time .form,
+.practice .card .data.progression
+{
   grid-column: 1 / 3;
 }
 
 .practice .card .this-time .form input {
   margin-bottom: 1rem;
+}
+
+.practice .card .buttons {
+  margin-top: 1rem;
+}
+
+.practice .card .buttons > * {
+  width: 50%;
 }
 
 .stats {
@@ -129,10 +143,12 @@ body { margin: 0; }
 
 .button.small {
   font-size: 1rem;
+  min-width: 8em;
 }
 
 .buttons {
   display: flex;
+  justify-content: center;
 }
 
 .buttons .button:not(:last-child) {

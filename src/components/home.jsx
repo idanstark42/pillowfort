@@ -12,7 +12,7 @@ export default function Home () {
     <Link to='/new' className={`primary ${requiresLogin ? 'disabled' : ''} button`}>start workout</Link>
     <Link to='/stats' className={`${requiresLogin ? 'disabled' : ''} button`}>see stats</Link>
     <Login />
-  </div>
+    </div>
 }
 
 function Login () {

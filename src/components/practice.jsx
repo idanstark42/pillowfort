@@ -34,15 +34,18 @@ export default function Practice () {
         <div className='title'>{exercise.name.replace('_', ' ')}</div>
         <div className='last-time'>
           <div className='sub-title'>Last Time</div>
-          <div className='data goal'>You tried:</div><div className='data goal'>{progression} {goal}</div>
-          <div className='data performed'>and did:</div><div className='data performed  '>{performance}</div>
+          <div className='data progression'>{progression}</div>
+          <div className='data goal'>{goal}</div>
+          <div className='data performance'>{performance}</div>
         </div>
         <div className='this-time'>
           <div className='sub-title'>This Time</div>
-          <div className='data goal'>Try:</div><div className='data goal'>{current.progression(exercise.name)} {current.goal(exercise.name)}</div>
-          <div className='data performed'>and then write how you did:</div>
-          <div className='form'>
+          <div className='data progression'>{current.progression(exercise.name)}</div>
+          <div className='data goal'>{current.goal(exercise.name)}</div>
+          <div className='data performance'>
             <input type="text" placeholder="how did you do?" value={current.performance(exercise.name) || ''} onChange={e => perform(exercise, e.target.value)}/>
+          </div>
+          <div className='form'>
             <div className='buttons'>
               <button className="success primary small button" onClick={() => perform(exercise, goal)}>I did it!</button>
               <button className="redo small button" onClick={() => perform(exercise, 'redo')}>redo</button>
