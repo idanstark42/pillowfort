@@ -22,7 +22,7 @@ export default function Practice () {
       setLast(log.entries[log.entries.length - 1])
       setCurrent(log.entries[log.entries.length - 1].next())
     }
-  }, [log])
+  }, [log, navigate])
 
   if (log === REQUIRES_LOGIN || !last || !current) {
     return <div className='loading' />

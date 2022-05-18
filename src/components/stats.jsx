@@ -29,7 +29,7 @@ export default function Stats () {
     }, { name: entry.date }))
     .filter(({ name }) => name !== 'Invalid date'))
     }
-  })
+  }, [log, navigate, setAddendenceData])
 
   if (log === REQUIRES_LOGIN) {
     return <div className='loading' />

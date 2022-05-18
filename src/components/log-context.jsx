@@ -15,7 +15,13 @@ export function WithLog ({ appId, children }) {
   const [user, setUser] = useState()
   const [url, setURL] = useState(Cookies.get(CONNECTION_KEY))
 
-  async function loadLog (logURL) {
+  async function updateURL (newURL) {
+    await Cookies.set(CONNECTION_KEY, newURL)
+    await setURL(newURL)
+  }
+
+  useEffect(() => {
+    async function loadLog (logURL) {
       if (logURL) {
         const user = await WorkoutLog.ping(logURL)
         if (!user) {
@@ -30,19 +36,10 @@ export function WithLog ({ appId, children }) {
         setLog(REQUIRES_LOGIN)
       }
   }
-
-  async function updateURL (newURL) {
-    console.log('update', newURL)
-    await Cookies.set(CONNECTION_KEY, newURL)
-    await setURL(newURL)
-    await loadLog(newURL)
-  }
-
-  useEffect(() => {
-    (async () => {
+  (async () => {
       await loadLog(url)
     })()
-  }, [])
+  }, [url])
 
   if (!log) {
     return <div className='loading' />
