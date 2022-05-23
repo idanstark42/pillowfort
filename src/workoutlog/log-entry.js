@@ -4,7 +4,7 @@ export default class LogEntry {
   }
 
   next () {
-    const date = (new Date()).toLocaleDateString('en-GB').replace('/', '.')
+    const date = (new Date()).toLocaleDateString('en-GB').replaceAll('/', '.')
     return new LogEntry(date, this.exerciseEntries.map(exerciseEntry => exerciseEntry.next()))
   }
 
