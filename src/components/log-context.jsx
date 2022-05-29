@@ -9,7 +9,6 @@ const LogContext = createContext()
 
 export const useLog = () => useContext(LogContext)
 
-// https://script.google.com/macros/s/AKfycbyjI5YIyE_wj_UP0zeNDXiI5u0cSXfjdJCmuVul8X2hIbHRUXC-XjLWtniKESKlz6ct/exec
 export function WithLog ({ appId, children }) {
   const [log, setLog] = useState(false)
   const [user, setUser] = useState()
@@ -29,6 +28,7 @@ export function WithLog ({ appId, children }) {
           console.log('Invalid URL found, please enter a new one')
           setLog(REQUIRES_LOGIN)
         } else {
+          updateURL(logURL)
           setUser(user)
           setLog(await WorkoutLog.load(logURL))
         }
@@ -36,9 +36,7 @@ export function WithLog ({ appId, children }) {
         setLog(REQUIRES_LOGIN)
       }
   }
-  (async () => {
-      await loadLog(url)
-    })()
+  (async () => {  await loadLog(url)  })()
   }, [url])
 
   if (!log) {

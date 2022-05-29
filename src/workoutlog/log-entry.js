@@ -24,8 +24,12 @@ export default class LogEntry {
     return this.get(exercise, 'progression')
   }
 
-  get (exercise, prop) {
-    return this.exerciseEntries.find(exEntry => exEntry.exercise.name === exercise)[prop]
+  get (exercise) {
+    return this.exerciseEntries.find(exEntry => exEntry.exercise.name === exercise)
+  }
+
+  done () {
+    return this.exerciseEntries.every(exEntry => Boolean(exEntry.performance))
   }
 
   toJson () {

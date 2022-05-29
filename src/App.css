@@ -33,35 +33,63 @@ body { margin: 0; }
 }
 
 .practice .card {
-  height: unset;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  padding-top: 2rem;
+  position: relative;
+  box-shadow: #95673d 1px 1px 2px 1px;
 }
 
-.practice .card .last-time, .practice .card  .this-time {
-  display: grid;
-  grid-template: auto / auto auto;
+.practice .card::before {
+  content: attr(name);
+  font: bold 1rem 'Cutive Mono';
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
 }
 
-.practice .card .last-time {
-  margin-bottom: 1rem;
+.practice .card .actions {
+  width: 100%;
 }
 
-.practice .card .sub-title,
-.practice .card .this-time .form,
-.practice .card .data.progression
-{
-  grid-column: 1 / 3;
+.practice .card .writing-form {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
 }
 
-.practice .card .this-time .form input {
-  margin-bottom: 1rem;
+.practice .card .writing-form .icon {
+  padding-left: 0.5rem;
 }
 
-.practice .card .buttons {
-  margin-top: 1rem;
-}
-
-.practice .card .buttons > * {
-  width: 50%;
+.practice .card.done::after {
+    content: attr(performance);
+    position: absolute;
+    top: 2rem;
+    right: 1rem;
+    transform: rotate(12deg);
+    color: #555;
+    font-size: 2rem;
+    font-weight: 700;
+    border: 0.25rem solid #555;
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    text-transform: uppercase;
+    border-radius: 1rem;
+    font-family: 'Courier';
+    -webkit-mask-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png);
+    -webkit-mask-size: 944px 604px;
+    mix-blend-mode: multiply;
+    color: #0A9928;
+    border: 0.5rem solid #0A9928;
+    -webkit-mask-position: 13rem 6rem;
+    transform: rotate(14deg);
+    border-radius: 0;
 }
 
 .stats {
