@@ -12,22 +12,6 @@ export default class LogEntry {
     this.exerciseEntries.find(exEntry => exEntry.exercise.name === exercise).perform(performance)
   }
 
-  goal (exercise) {
-    return this.get(exercise, 'goal')
-  }
-
-  performance (exercise) {
-    return this.get(exercise, 'performance')
-  }
-
-  progression (exercise) {
-    return this.get(exercise, 'progression')
-  }
-
-  get (exercise) {
-    return this.exerciseEntries.find(exEntry => exEntry.exercise.name === exercise)
-  }
-
   done () {
     return this.exerciseEntries.every(exEntry => Boolean(exEntry.performance))
   }

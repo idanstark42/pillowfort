@@ -4,7 +4,8 @@ export default class ExerciseEntry {
   }
 
   next () {
-    return new ExerciseEntry(this.exercise, this.progression, this.exercise.nextGoal(this.progression, this.goal, this.performance), null)
+    const [nextProgression, nextGoal] = this.exercise.nextGoal(this.progression, this.goal, this.performance)
+    return new ExerciseEntry(this.exercise, nextProgression, nextGoal, null)
   }
 
   perform (performance) {

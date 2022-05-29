@@ -1,8 +1,9 @@
 import BasicExercise from './basic-exercise'
 
 export default class SetsExercise extends BasicExercise {
-  constructor ({ name, progressions, min, max, interval, sets }) {
+  constructor ({ name, progressions, min, max, interval, sets, group }) {
     super(name, progressions)
+    this.group = group
     this.sets = sets
     this.interval = interval
     this.min = sets * min
