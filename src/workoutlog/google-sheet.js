@@ -18,7 +18,7 @@ export async function loadFromGoogleSheet (url) {
 }
 
 export async function saveToGoogleSheet (url, entry) {
-  const response = await action(url, 'add', { date: entry.date, exercises: JSON.stringify(entry.exercises) })
+  await action(url, 'add', { date: entry.date, exercises: JSON.stringify(entry.exercises) })
   return true
 }
 

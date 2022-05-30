@@ -22,7 +22,7 @@ export default function Home () {
 function Login ({ setLoading }) {
   const { url, updateURL, user } = useLog()
   const [editing, setEditing] = useState(!user)
-  const [loginValue, setLoginValue] = useState(false)
+  const [loginValue, setLoginValue] = useState(url)
   const login = async () => {
     await setLoading(true)
     await updateURL(String(loginValue))
