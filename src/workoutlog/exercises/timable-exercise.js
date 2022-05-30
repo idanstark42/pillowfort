@@ -2,8 +2,7 @@ import BasicExercise from './basic-exercise'
 
 export default class TimableExercise extends BasicExercise {
   constructor ({ name, progressions, min, max, interval, group }) {
-    super(name, progressions)
-    this.group = group
+    super(name, progressions, group)
     this.interval = interval
     this.min = min
     this.max = max

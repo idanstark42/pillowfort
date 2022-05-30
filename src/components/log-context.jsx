@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
 import Cookies from 'js-cookie'
 
 import WorkoutLog from '../workoutlog'
@@ -25,7 +26,8 @@ export function WithLog ({ appId, children }) {
         const user = await WorkoutLog.ping(logURL)
         if (!user) {
           updateURL(undefined)
-          console.log('Invalid URL found, please enter a new one')
+          setUser(undefined)
+          toast.error('Invalid URL found, please enter a new one')
           setLog(REQUIRES_LOGIN)
         } else {
           updateURL(logURL)
@@ -34,6 +36,7 @@ export function WithLog ({ appId, children }) {
         }
       } else {
         setLog(REQUIRES_LOGIN)
+        setUser(undefined)
       }
   }
   (async () => {  await loadLog(url)  })()

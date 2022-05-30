@@ -1,7 +1,8 @@
 export default class Exercise {
-  constructor (name, progressions) {
+  constructor (name, progressions, group) {
     this.name = name
     this.progressions = progressions
+    this.group = group
   }
 
   firstProgression () {

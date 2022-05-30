@@ -3,7 +3,7 @@ import SetsExercise from './sets-exercise'
 export default class TimableExercise extends SetsExercise {
   constructor (props) {
     super(props)
-    if (String(this.sets).inlucdes('-')) {
+    if (String(this.sets).includes('-')) {
       this.sets = String(this.sets).split('-')
     }
   }

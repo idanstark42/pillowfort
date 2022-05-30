@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { FaTimes, FaCheck } from 'react-icons/fa'
+import ClipLoader from 'react-spinners/ClipLoader'
+import { toast } from 'react-toastify'
 
 import { useForceUpdate } from './force-update-hook'
 import { useLog, REQUIRES_LOGIN } from './log-context'
@@ -11,9 +13,17 @@ export default function Practice () {
   const forceUpdate = useForceUpdate()
   const [last, setLast] = useState()
   const [current, setCurrent] = useState()
+  const [loading, setLoading] = useState(false)
   const perform = (exercise, performance) => {
     current.perform(exercise.name, performance)
     forceUpdate()
+  }
+
+  const save = async () => {
+    setLoading(true)
+    await log.save(current)
+    navigate('/')
+    toast.success('Workout saved to log')
   }
 
   useEffect(() => {
@@ -30,9 +40,10 @@ export default function Practice () {
   }
 
   return <div className='practice'>
+    {loading ? <div className='loader'><ClipLoader speedMultiplier={0.6} color='#663300' loading={true} size={100} /></div> : ''}
     {last.exerciseEntries.map(previousExEntry => <ExerciseCard key={previousExEntry.exercise.name} previousExEntry={previousExEntry} current={current} perform={perform} />)}
     <div className="footer">
-      <div className={`primary button ${current.done() ? '' : 'disabled'}`} onClick={() => log.save(current)}>DONE</div>
+      <div className={`primary button ${current.done() ? '' : 'disabled'}`} onClick={save}>DONE</div>
     </div>
   </div>
 }
@@ -48,8 +59,8 @@ function ExerciseCard ({ previousExEntry, current, perform }) {
   const progressionName = currentExEntry.progression.split(' - ')[1].replace(/\(.+?\)/,'')
   const parenthases = currentExEntry.progression.match(/\((.+?)\)/) ? currentExEntry.progression.match(/\((.+?)\)/)[1] : false
 
-  return <div name={currentExEntry.exercise.name.replaceAll('_', ' ')} className={`exercise card ${previousExEntry.exercise.name} ${Boolean(currentExEntry.performance) ? 'done' : ''}`} performance={currentExEntry.performance || ''}>
-    <div className='sub-title'>
+  return <div name={currentExEntry.exercise.name.replaceAll('_', ' ')} className={`exercise card ${previousExEntry.exercise.name} ${Boolean(currentExEntry.performance) ? 'done' : ''} ${currentExEntry.active ? '' : 'disabled'}`} performance={(currentExEntry.performance === currentExEntry.goal) ? 'DONE' : (currentExEntry.performance || '')}>
+    <div className='header sub-title'>
       {progressionName}
       <div className='data'>{parenthases || ''}</div>
     </div>
@@ -73,7 +84,7 @@ function ExerciseCard ({ previousExEntry, current, perform }) {
       <div className='button' onClick={() => perform(currentExEntry.exercise, 'redo')}>REDO</div>
       {writing ?
         <div className='writing-form'>
-          <input type='text' name='input' value={writingValue} onChange={e => setWritingValue(e.target.val)} />
+          <input type='text' name='input' value={writingValue} onChange={e => setWritingValue(e.target.value)} />
           <div className='done icon' onClick={() => { perform(currentExEntry.exercise, String(writingValue)); setWriting(false) }}><FaCheck /></div>
           <div className='close icon' onClick={() => setWriting(false)}><FaTimes /></div>
         </div>

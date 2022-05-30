@@ -2,7 +2,7 @@
 
 body { margin: 0; }
 
-#root, #root > *:only-child {
+#root, #root > *:not(.Toastify) {
   width: 100vw;
   height: 100vh;
   background: #fedbc7;
@@ -14,8 +14,8 @@ body { margin: 0; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: #95673d;
 }
-
 
 .home > img {
   width: 10rem;
@@ -26,7 +26,7 @@ body { margin: 0; }
   margin-bottom: 10vh;
 }
 
-.login {
+.login:not(.editing) {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,41 +56,51 @@ body { margin: 0; }
   width: 100%;
 }
 
-.practice .card .writing-form {
+.practice .card .writing-form, .login {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 1rem;
   margin: 0.5rem;
 }
 
-.practice .card .writing-form .icon {
+.practice .card .writing-form .icon, .login .icon {
   padding-left: 0.5rem;
 }
 
 .practice .card.done::after {
-    content: attr(performance);
-    position: absolute;
-    top: 2rem;
-    right: 1rem;
-    transform: rotate(12deg);
-    color: #555;
-    font-size: 2rem;
-    font-weight: 700;
-    border: 0.25rem solid #555;
-    display: inline-block;
-    padding: 0.25rem 1rem;
-    text-transform: uppercase;
-    border-radius: 1rem;
-    font-family: 'Courier';
-    -webkit-mask-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png);
-    -webkit-mask-size: 944px 604px;
-    mix-blend-mode: multiply;
-    color: #0A9928;
-    border: 0.5rem solid #0A9928;
-    -webkit-mask-position: 13rem 6rem;
-    transform: rotate(14deg);
-    border-radius: 0;
+  content: attr(performance);
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+  transform: rotate(12deg);
+  color: #555;
+  font-size: 2rem;
+  font-weight: 700;
+  border: 0.25rem solid #555;
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  text-transform: uppercase;
+  border-radius: 1rem;
+  font-family: 'Courier';
+  -webkit-mask-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png);
+  -webkit-mask-size: 944px 604px;
+  mix-blend-mode: multiply;
+  color: #0A9928;
+  border: 0.5rem solid #0A9928;
+  -webkit-mask-position: 13rem 6rem;
+  transform: rotate(14deg);
+  border-radius: 0;
 }
+
+.practice .card.disabled {
+  opacity: 0.5;
+  height: unset;
+}
+
+.practice .card.disabled > *:not(.header) {
+  display: none;
+}
+
 
 .stats {
   width: 100%;
@@ -136,6 +146,17 @@ body { margin: 0; }
 .data {
   font: bold 1rem 'Cutive Mono';
   color: #663300;
+}
+
+.loader {
+  background: #fedbc770;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .button {

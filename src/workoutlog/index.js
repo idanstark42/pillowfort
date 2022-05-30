@@ -8,16 +8,26 @@ const BACKEND_VERSION = '1.0'
 export default class WorkoutLog {
   constructor (url, exercises, entries) {
     Object.assign(this, { url, exercises, entries })
+
+    this.exerciseGroups = this.exercises.reduce((groups, exercise) => {
+      if (!exercise.group) {
+        groups[0].push(exercise)
+        return groups
+      }
+      if (!groups[exercise.group]) groups[exercise.group] = []
+      groups[exercise.group].push(exercise)
+      return groups
+    }, [[]])
   }
 
-  save (entry) {
-    saveToGoogleSheet(this.url, entry.toJson())
+  async save (entry) {
+    await saveToGoogleSheet(this.url, entry.toJson())
   }
 
   static async load (url) {
     const raw = await loadFromGoogleSheet(url)
     const exercises = raw.exercises.map(parseExercise)
-    const entries = raw.log.map(entry => new LogEntry(entry.date, entry.exercises.map(exEntry => new ExerciseEntry(exercises.find(ex => ex.name === exEntry.exercise), exEntry.progression, exEntry.goal, exEntry.performance))))
+    const entries = raw.log.map(entry => new LogEntry(entry.date, entry.exercises.map(exEntry => new ExerciseEntry(exercises.find(ex => ex.name === exEntry.exercise), exEntry.progression, exEntry.goal, exEntry.performance, Boolean(exEntry.performance)))))
     return new WorkoutLog(url, exercises, entries)
   }
 
