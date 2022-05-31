@@ -20,7 +20,7 @@ export default class Exercise {
     if (goalNumber > performanceNumber) {
       return [progression, goal]
     } else if (goalNumber === this.max) {
-      return [this.progressions[this.progressions.indexOf(progression) + 1], this.min]
+      return [this.progressions[this.progressions.indexOf(progression) + 1], this.firstGoal()]
     } else {
       return [progression, this.toText(performanceNumber + this.interval)]
     }
