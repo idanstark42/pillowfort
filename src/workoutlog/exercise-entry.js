@@ -4,8 +4,16 @@ export default class ExerciseEntry {
   }
 
   next (active = true) {
+    if (!this.active && this.last) {
+      return this.last.next(active)
+    }
     const [nextProgression, nextGoal] = this.exercise.nextGoal(this.progression, this.goal, this.performance)
-    return new ExerciseEntry(this.exercise, nextProgression, nextGoal, null, active)
+    return new ExerciseEntry(this.exercise, nextProgression, active ? nextGoal : this.goal, null, active)
+  }
+
+  lastActive () {
+    if (!this.active && this.last) return this.last
+    return this
   }
 
   perform (performance) {

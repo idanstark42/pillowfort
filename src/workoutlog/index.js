@@ -28,6 +28,7 @@ export default class WorkoutLog {
     const raw = await loadFromGoogleSheet(url)
     const exercises = raw.exercises.map(parseExercise)
     const entries = raw.log.map(entry => new LogEntry(entry.date, entry.exercises.map(exEntry => new ExerciseEntry(exercises.find(ex => ex.name === exEntry.exercise), exEntry.progression, exEntry.goal, exEntry.performance, Boolean(exEntry.performance)))))
+    entries.forEach((logEntry, index) => { if (index !== 0) { logEntry.setLast(entries[index - 1]) } })
     return new WorkoutLog(url, exercises, entries)
   }
 

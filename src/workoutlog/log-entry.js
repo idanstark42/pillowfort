@@ -3,6 +3,13 @@ export default class LogEntry {
     Object.assign(this, { date, exerciseEntries })
   }
 
+  setLast (last) {
+    this.last = last
+    this.exerciseEntries.forEach(exEntry => {
+      exEntry.last = this.last.exerciseEntries.find(lastExEntry => lastExEntry.exercise.name === exEntry.exercise.name)
+    })
+  }
+
   next () {
     const date = (new Date()).toLocaleDateString('en-GB').replaceAll('/', '.')
     return new LogEntry(date, this.exerciseEntries.map(exerciseEntry => exerciseEntry.next(this.isNextExerciseEntryActive(exerciseEntry))))

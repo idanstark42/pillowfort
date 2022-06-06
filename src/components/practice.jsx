@@ -41,7 +41,7 @@ export default function Practice () {
 
   return <div className='practice'>
     {loading ? <div className='loader'><ClipLoader speedMultiplier={0.6} color='#663300' loading={true} size={100} /></div> : ''}
-    {last.exerciseEntries.map(previousExEntry => <ExerciseCard key={previousExEntry.exercise.name} previousExEntry={previousExEntry} current={current} perform={perform} />)}
+    {last.exerciseEntries.map(previousExEntry => <ExerciseCard key={previousExEntry.exercise.name} previousExEntry={previousExEntry.lastActive()} current={current} perform={perform} />)}
     <div className="footer">
       <div className={`primary button ${current.done() ? '' : 'disabled'}`} onClick={save}>DONE</div>
     </div>

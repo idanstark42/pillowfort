@@ -16,7 +16,7 @@ export function WithLog ({ appId, children }) {
   const [url, setURL] = useState(Cookies.get(CONNECTION_KEY))
 
   async function updateURL (newURL) {
-    await Cookies.set(CONNECTION_KEY, newURL)
+    await Cookies.set(CONNECTION_KEY, newURL, { expires: 365255 }) // Expires in a thousand  years
     await setURL(newURL)
   }
 
