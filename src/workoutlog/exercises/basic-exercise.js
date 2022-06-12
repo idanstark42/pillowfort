@@ -14,10 +14,12 @@ export default class Exercise {
   }
 
   nextGoal (progression, goal, performance) {
-    const goalNumber = this.toNumber(goal) || 0
-    const performanceNumber = this.toNumber(performance) || 0
+    const goalText = String(goal)
+    const performanceText = String(performance)
+    const goalNumber = this.toNumber(goalText) || 0
+    const performanceNumber = this.toNumber(performanceText) || 0
 
-    switch (this.compare(goalNumber, performanceNumber, goal, performance)) {
+    switch (this.compare(goalNumber, performanceNumber, goalText, performanceText)) {
       case -1: return [progression, goal]
       case 0: return [this.progressions[this.progressions.indexOf(progression) + 1], this.firstGoal()]
       default: return [progression, this.toText(performanceNumber + this.interval)]
