@@ -10,7 +10,7 @@ export default class Exercise {
   }
 
   firstGoal () {
-    return this.toText(this.min)
+    return this.toText(Math.floor(this.min))
   }
 
   nextGoal (progression, goal, performance) {
@@ -22,7 +22,7 @@ export default class Exercise {
     switch (this.compare(goalNumber, performanceNumber, goalText, performanceText)) {
       case -1: return [progression, goal]
       case 0: return [this.progressions[this.progressions.indexOf(progression) + 1], this.firstGoal()]
-      default: return [progression, this.toText(performanceNumber + this.interval)]
+      default: return [progression, this.toText(Math.floor(performanceNumber + this.interval))]
     }
   }
 
