@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 
 import { useForceUpdate } from './force-update-hook'
 import { useLog, REQUIRES_LOGIN } from './log-context'
+import { playSuccessSound } from '../lib/success-sound'
 
 export default function Practice () {
   const { log } = useLog()
@@ -23,6 +24,7 @@ export default function Practice () {
     setLoading(true)
     await log.save(current)
     navigate('/')
+    playSuccessSound()
     toast.success('Workout saved to log')
   }
 
@@ -43,7 +45,7 @@ export default function Practice () {
     {loading ? <div className='loader'><ClipLoader speedMultiplier={0.6} color='#663300' loading={true} size={100} /></div> : ''}
     {last.exerciseEntries.map(previousExEntry => <ExerciseCard key={previousExEntry.exercise.name} previousExEntry={previousExEntry.lastActive()} current={current} perform={perform} />)}
     <div className="footer">
-      <div className={`primary button ${current.done() ? '' : 'disabled'}`} onClick={save}>DONE</div>
+      <div className={`primary button ${current.done() ? '' : 'disabled'}`} onClick={save}>Exercise Completed!</div>
     </div>
   </div>
 }
@@ -59,7 +61,18 @@ function ExerciseCard ({ previousExEntry, current, perform }) {
   const progressionName = currentExEntry.progression.split(' - ')[1].replace(/\(.+?\)/,'')
   const parenthases = currentExEntry.progression.match(/\((.+?)\)/) ? currentExEntry.progression.match(/\((.+?)\)/)[1] : false
 
-  return <div name={currentExEntry.exercise.name.replaceAll('_', ' ')} className={`exercise card ${previousExEntry.exercise.name} ${Boolean(currentExEntry.performance) ? 'done' : ''} ${currentExEntry.active ? '' : 'disabled'}`} performance={(currentExEntry.performance === currentExEntry.goal) ? 'DONE' : (currentExEntry.performance || '')}>
+  const done = Boolean(currentExEntry.performance)
+  const exactSuccess = done && currentExEntry.performance === currentExEntry.goal
+  const betterThenSuccess = done && currentExEntry.exercise.toNumber(currentExEntry.performance) > currentExEntry.exercise.toNumber(currentExEntry.goal)
+  const success = done && (exactSuccess || betterThenSuccess)
+
+  return <div name={currentExEntry.exercise.name.replaceAll('_', ' ')} className={
+      `exercise card
+        ${previousExEntry.exercise.name}
+        ${done ? 'done' : ''}
+        ${success ? 'success' : ''}
+        ${currentExEntry.active ? '' : 'disabled'}`}
+        performance={exactSuccess ? 'DONE' : (currentExEntry.performance || '')}>
     <div className='header sub-title'>
       {progressionName}
       <div className='data'>{parenthases || ''}</div>
