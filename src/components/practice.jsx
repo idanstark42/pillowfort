@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import { useForceUpdate } from './force-update-hook'
 import { useLog, REQUIRES_LOGIN } from './log-context'
 import { playSuccessSound } from '../lib/success-sound'
+import { loadPerformance, savePerformance } from '../lib/exercise-memory'
 
 export default function Practice () {
   const { log } = useLog()
@@ -15,8 +16,10 @@ export default function Practice () {
   const [last, setLast] = useState()
   const [current, setCurrent] = useState()
   const [loading, setLoading] = useState(false)
+
   const perform = (exercise, performance) => {
     current.perform(exercise.name, performance)
+    savePerformance(current)
     forceUpdate()
   }
 
@@ -33,7 +36,9 @@ export default function Practice () {
       navigate('/')
     } else {
       setLast(log.entries[log.entries.length - 1])
-      setCurrent(log.entries[log.entries.length - 1].next())
+      const currentLogEntry = log.entries[log.entries.length - 1].next()
+      setCurrent(currentLogEntry)
+      loadPerformance(currentLogEntry)
     }
   }, [log, navigate])
 
