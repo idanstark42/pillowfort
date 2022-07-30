@@ -40,7 +40,6 @@ export default function Stats () {
       entry.exerciseEntries.filter(exEntry => exEntry.success()).forEach(exEntry => { monthEntry[exEntry.exercise.name] = monthEntry[exEntry.exercise.name] + 1 })
       return months
     }, []))
-    console.log(exerciseSuccessesData)
 
   }, [log, navigate, setExercises, setAddendenceData, setSuccessesData, setExerciseSuccessesData])
 

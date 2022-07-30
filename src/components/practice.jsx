@@ -70,7 +70,6 @@ function ExerciseCard ({ previousExEntry, current, perform }) {
 
   const done = currentExEntry.done()
   const exactSuccess = currentExEntry.exactSuccess()
-  const betterThenSuccess = currentExEntry.betterThenSuccess()
   const success = currentExEntry.success()
 
   return <div name={currentExEntry.exercise.name.replaceAll('_', ' ')} className={
