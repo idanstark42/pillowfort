@@ -98,6 +98,7 @@ function ExerciseCard ({ previousExEntry, current, perform }) {
       }
     </div>
     <div className='actions'>
+      { done ? <div className='small link right button clear' onClick={() => perform(currentExEntry.exercise, undefined)}>Clear</div> : '' }
       <div className='primary button' onClick={() => perform(currentExEntry.exercise, currentExEntry.goal)}>DID IT</div>
       <div className='button' onClick={() => perform(currentExEntry.exercise, 'redo')}>REDO</div>
       {writing ?

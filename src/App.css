@@ -59,6 +59,13 @@ body::after{
 
 .practice .card .actions {
   width: 100%;
+  position: relative;
+}
+
+.practice .card .clear {
+  position: absolute;
+  right: 0;
+  top: -3rem;
 }
 
 .practice .card .writing-form, .login {
@@ -197,6 +204,14 @@ body::after{
 .button.link {
   border: none;
   text-decoration: underline;
+}
+
+.button.right {
+  text-align: right;
+}
+
+.button.left {
+  text-align: left;
 }
 
 .button.small {
