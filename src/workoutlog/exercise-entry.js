@@ -16,6 +16,8 @@ export default class ExerciseEntry {
     return this
   }
 
+  // actions
+
   perform (performance) {
     this.performance = performance
   }
@@ -34,6 +36,24 @@ export default class ExerciseEntry {
 
   increaseProgression () {
     this.progression = this.exercise.progressions[this.exercise.progressions.indexOf(this.progression) + 1] || this.exercise.progressions[this.exercise.progressions.length - 1]
+  }
+
+  // data
+
+  done () {
+    return Boolean(this.performance)
+  }
+
+  exactSuccess () {
+    return this.done() && (this.performance === this.goal)
+  }
+
+  betterThenSuccess () {
+    return this.done() && this.exercise.toNumber(this.performance) > this.exercise.toNumber(this.goal)
+  }
+
+  success () {
+    return this.exactSuccess() || this.betterThenSuccess()
   }
 
   toJson () {

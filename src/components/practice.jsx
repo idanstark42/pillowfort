@@ -68,10 +68,10 @@ function ExerciseCard ({ previousExEntry, current, perform }) {
   const progressionName = currentExEntry.progression.split(' - ')[1].replace(/\(.+?\)/,'')
   const parenthases = currentExEntry.progression.match(/\((.+?)\)/) ? currentExEntry.progression.match(/\((.+?)\)/)[1] : false
 
-  const done = Boolean(currentExEntry.performance)
-  const exactSuccess = done && currentExEntry.performance === currentExEntry.goal
-  const betterThenSuccess = done && currentExEntry.exercise.toNumber(currentExEntry.performance) > currentExEntry.exercise.toNumber(currentExEntry.goal)
-  const success = done && (exactSuccess || betterThenSuccess)
+  const done = currentExEntry.done()
+  const exactSuccess = currentExEntry.exactSuccess()
+  const betterThenSuccess = currentExEntry.betterThenSuccess()
+  const success = currentExEntry.success()
 
   return <div name={currentExEntry.exercise.name.replaceAll('_', ' ')} className={
       `exercise card
