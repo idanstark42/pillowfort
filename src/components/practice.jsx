@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
-import { FaTimes, FaCheck } from 'react-icons/fa'
+import { FaTimes, FaCheck, FaMinus, FaPlus } from 'react-icons/fa'
 import ClipLoader from 'react-spinners/ClipLoader'
 import { toast } from 'react-toastify'
 
@@ -57,7 +57,9 @@ export default function Practice () {
 
 
 function ExerciseCard ({ previousExEntry, current, perform }) {
+  const forceUpdate = useForceUpdate()
   const [writing, setWriting] = useState(false)
+  const [editing, setEditing] = useState(false)
   const [explaining, setExplaining] = useState(false)
   const [writingValue, setWritingValue] = useState(current.get(previousExEntry.exercise.name).goal)
   const currentExEntry = current.get(previousExEntry.exercise.name)
@@ -78,13 +80,25 @@ function ExerciseCard ({ previousExEntry, current, perform }) {
         ${success ? 'success' : ''}
         ${currentExEntry.active ? '' : 'disabled'}`}
         performance={exactSuccess ? 'DONE' : (currentExEntry.performance || '')}>
-    <div className='header sub-title'>
-      {progressionName}
-      <div className='data'>{parenthases || ''}</div>
+    <div className='editable'>
+      {(editing && !done) ? <div className='editing icon' onClick={() => { currentExEntry.reduceProgression(); forceUpdate() } }><FaMinus /></div> : ''}
+      <div className='header sub-title'>
+        {progressionName}
+        <div className='data'>{parenthases || ''}</div>
+      </div>
+      {(editing && !done) ? <div className='editing icon' onClick={() => { currentExEntry.increaseProgression(); forceUpdate() }}><FaPlus /></div> : ''}
     </div>
     <div>
+      { done ? '' :
+        (editing ?
+          <div className='small link right button edit' onClick={() => setEditing(false)}>stop editing</div> :
+          <div className='small link right button edit' onClick={() => setEditing(true)}>edit goal</div>) }
       <div className='data'>goal</div>
-      <div className='goal title'>{currentExEntry.goal.replace(/\s?,\s?/g, '|')}</div>
+      <div className='editable'>
+        {(editing && !done) ? <div className='editing reduce icon' onClick={() => { currentExEntry.reduceGoal(); forceUpdate() }}><FaMinus /></div> : ''}
+        <div className='goal title'>{currentExEntry.goal.replace(/\s?,\s?/g, '|')}</div>
+        {(editing && !done) ? <div className='editing add icon' onClick={() => { currentExEntry.increaseGoal(); forceUpdate() }}><FaPlus /></div> : ''}
+      </div>
       {explaining ?
         <div className='explanation data' onClick={() => setExplaining(false)}>
           {sameProgration ? 

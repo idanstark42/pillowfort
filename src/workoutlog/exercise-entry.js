@@ -20,6 +20,22 @@ export default class ExerciseEntry {
     this.performance = performance
   }
 
+  increaseGoal () {
+    this.goal = this.exercise.toText(this.exercise.toNumber(this.goal) + 1)
+  }
+
+  reduceGoal () {
+    this.goal = this.exercise.toText(this.exercise.toNumber(this.goal) - 1)
+  }
+
+  reduceProgression () {
+    this.progression = this.exercise.progressions[this.exercise.progressions.indexOf(this.progression) - 1] || this.exercise.progressions[0]
+  }
+
+  increaseProgression () {
+    this.progression = this.exercise.progressions[this.exercise.progressions.indexOf(this.progression) + 1] || this.exercise.progressions[this.exercise.progressions.length - 1]
+  }
+
   toJson () {
     return { name: this.exercise.name, progression: this.progression, goal: this.goal, performance: this.performance }
   }

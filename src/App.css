@@ -38,6 +38,7 @@ body::after{
 }
 
 .practice .card {
+  position: relative;
   height: 80vh;
   display: flex;
   flex-direction: column;
@@ -66,6 +67,20 @@ body::after{
   position: absolute;
   right: 0;
   top: -3rem;
+}
+
+.practice .card .edit {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.practice .card .editable {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .practice .card .writing-form, .login {
