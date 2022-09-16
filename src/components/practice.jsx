@@ -26,7 +26,7 @@ export default function Practice () {
   const save = async () => {
     setLoading(true)
     await log.save(current)
-    navigate('/')
+    navigate('/summary')
     playSuccessSound()
     toast.success('Workout saved to log')
   }

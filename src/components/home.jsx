@@ -15,6 +15,7 @@ export default function Home () {
     <div className='title'>workout.log</div>
     <Link to='/new' className={`primary ${requiresLogin ? 'disabled' : ''} button`}>start workout</Link>
     <Link to='/stats' className={`${requiresLogin ? 'disabled' : ''} button`}>see stats</Link>
+    <Link to='/summary' className={`${requiresLogin ? 'disabled' : ''} button`}>previous workouts</Link>
     <Login setLoading={setLoading}/>
   </div>
 }
