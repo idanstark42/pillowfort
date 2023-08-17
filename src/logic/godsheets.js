@@ -7,18 +7,18 @@ const HTTP_OPTIONS = {
   headers: { 'Content-Type': 'text/plain; charset=UTF-8' }
 }
 
-export async function pingGoogleSheet (url) {
+export async function ping (url) {
   const response = await action(url, 'ping')
   return await response.json()
 }
 
-export async function loadFromGoogleSheet (url) {
+export async function load (url) {
   const response = await action(url, 'load')
   return await response.json()
 }
 
-export async function saveToGoogleSheet (url, entry) {
-  await action(url, 'add', { date: entry.date, exercises: JSON.stringify(entry.exercises) })
+export async function add (url, type, data) {
+  await action(url, 'add', { type, data: JSON.stringify(data) })
   return true
 }
 

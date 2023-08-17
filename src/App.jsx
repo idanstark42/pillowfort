@@ -2,27 +2,25 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { ToastContainer, Slide } from 'react-toastify'
 
 import Home from './components/home'
+import Add from './components/add'
 import Stats from './components/stats'
-import Summary from './components/summary'
-import Practice from './components/practice'
 
-import { WithLog } from './components/log-context'
+import { WithGodSheets } from './components/godsheets-context'
 
 import './App.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
-  return <WithLog>
+  return <WithGodSheets>
     <ToastContainer position='bottom-right' transition={Slide} />
     <Router>
       <Routes>
-        <Route path='/new' element={<Practice />} />
         <Route path='/stats' element={<Stats />} />
-        <Route path='/summary' element={<Summary />} />
+        <Route path='/add' element={<Add />} />
         <Route path='/' element={<Home />} />
       </Routes>
     </Router>
-  </WithLog>
+  </WithGodSheets>
 }
 
 export default App;
