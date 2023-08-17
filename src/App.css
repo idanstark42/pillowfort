@@ -40,7 +40,6 @@ body::after{
 
 .home img {
   width: 16rem;
-  aspect-ratio: 1;
 }
 
 .home .title {
@@ -49,6 +48,22 @@ body::after{
 
 .home .text {
   text-align: center;
+}
+
+.home .partials, .home .total {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.home .partials {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.home .total {
+  font-size: 2rem;
+  margin-bottom: 2rem;
 }
 
 .home .add-year {
@@ -61,11 +76,11 @@ body::after{
 }
 
 .home .content {
-  height: 40vh;
+  height: 55vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .add {

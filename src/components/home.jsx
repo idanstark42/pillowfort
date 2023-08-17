@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaCheck } from 'react-icons/fa'
 import BarLoader from 'react-spinners/BarLoader'
+import CountUp from 'react-countup'
 
 import { useGodSheets } from './godsheets-context'
 
@@ -31,9 +32,20 @@ export default function Home() {
 }
 
 function MainMenu() {
+  const { godSheets } = useGodSheets()
+  const currentGodSheet = godSheets[(new Date()).getFullYear()]
+  const last = currentGodSheet.summary.findLast(month => month.total)
+  console.log(last)
+
   return <>
-    <Link to='/add' className='primary button'>add expense/income</Link>
-    <Link to='/stats' className='button'>dashboard</Link>
+    <div classNames='stat-summary'>
+      <div className='partials'><CountUp end={last.liquid} /> + <CountUp end={last.stocks} /></div>
+      <div className='total'><CountUp end={last.total} />₪</div>
+    </div>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <Link to='/add' className='primary button'>add entry</Link>
+      <Link to='/stats' className='button'>dashboard</Link>
+    </div>
   </>
 }
 
