@@ -11,6 +11,7 @@ export const useGodSheets = () => useContext(GodSheetsContext)
 
 export function WithGodSheets ({ children }) {
   const [godSheets, setGodSheets] = useState(false)
+  console.log(Cookies.get(CONNECTION_KEY))
   const [years, setYears] = useState(JSON.parse(Cookies.get(CONNECTION_KEY) || '{}'))
 
   const addYear = async url => {
@@ -30,7 +31,7 @@ export function WithGodSheets ({ children }) {
   }
 
   const save = newYears => {
-    Cookies.set(CONNECTION_KEY, JSON.stringify(newYears))
+    Cookies.set(CONNECTION_KEY, JSON.stringify(newYears), { expires: 100 * 365 * 24 * 60 * 60 })
     setYears(newYears)
   }
 
