@@ -25,13 +25,16 @@ body::after{
   overflow-y: scroll;
 }
 
+.home, .stats {
+  color: var(--main);
+  font-family: var(--font);
+}
+
 .home {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: var(--main);
-  font-family: var(--font);
 }
 
 .home > * {
@@ -50,18 +53,26 @@ body::after{
   text-align: center;
 }
 
-.home .partials, .home .total {
+.stats .summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 1rem;
+}
+
+.stats .partials, .stats .total {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.home .partials {
+.stats .partials {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
 
-.home .total {
+.stats .total {
   font-size: 2rem;
   margin-bottom: 2rem;
 }

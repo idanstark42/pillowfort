@@ -4,6 +4,7 @@ import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, AreaChart, A
 import { useNavigate } from 'react-router'
 import { FaArrowLeft } from 'react-icons/fa'
 import BarLoader from 'react-spinners/BarLoader'
+import CountUp from 'react-countup'
 
 import { useGodSheets } from './godsheets-context'
 
@@ -28,6 +29,8 @@ export default function Stats () {
   const { godSheets } = useGodSheets()
   const current = godSheets[new Date().getFullYear()]
   console.log(current)
+  const last = current.summary.findLast(month => month.total)
+  console.log(last)
   
   const navigate = useNavigate()
 
@@ -40,6 +43,11 @@ export default function Stats () {
   return <div className='stats'>
     <div className='icon' style={{ position: 'absolute', left: '1rem' }}><Link to='/'><FaArrowLeft style={{ color: 'var(--main)' }} /></Link></div>
     <div className='title'>statistics</div>
+
+    <div className='summary'>
+      <div className='partials'><CountUp end={last.liquid} /> + <CountUp end={last.stocks} /></div>
+      <div className='total'><CountUp end={last.total} />₪</div>
+    </div>
 
     <ResponsiveContainer width='90%' height='40%'>
       <BarChart data={current.expenseTypes}>
