@@ -112,6 +112,12 @@ body::after{
   font: 1rem var(--font);
 }
 
+.recharts-responsive-container {
+  margin: 1rem 5%;
+  width: 90%;
+  height: 40%;
+}
+
 .stats .footer {
   height: 3rem;
   background: white;
