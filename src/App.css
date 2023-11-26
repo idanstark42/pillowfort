@@ -111,6 +111,51 @@ body::after{
   flex: 1;
 }
 
+.add .types {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+
+.add .types .type-button {
+  width: 3rem;
+  aspect-ratio: 1/1;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 0.2rem;
+  margin: 0.2rem 0;
+  box-sizing: border-box;
+  border: var(--main) 1px solid;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add .types .type-button img {
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+.add .types .type-button .icon {
+  width: 100%;
+  aspect-ratio: 1/1;
+  fill: var(--main);
+  font-size: 2rem;
+  line-height: 2.2rem;
+  font-family: var(--font);
+}
+
+.add .types .type-button.selected {
+  background: var(--main);
+  color: var(--background);
+  border: none;
+}
+
 .stats {
   width: 100%;
   height: 100%;

@@ -6,6 +6,29 @@ import { FaArrowLeft } from 'react-icons/fa'
 
 import { useGodSheets } from './godsheets-context'
 
+import BOOKS_IMAGE from '../images/books.png'
+import CHARITY_IMAGE from '../images/charity.png'
+import DINING_IMAGE from '../images/dining.png'
+import ENTRETAINMENT_IMAGE from '../images/entretainment.png'
+import GROCERIES_IMAGE from '../images/groceries.png'
+import LIVING_IMAGE from '../images/living.png'
+import SOCIAL_IMAGE from '../images/social.png'
+import TRANSPOTATION_IMAGE from '../images/transportation.png'
+import PROJECTS_IMAGE from '../images/projects.png'
+
+const IMAGES = {
+  books: <img src={BOOKS_IMAGE} alt='books' />,
+  charity: <img src={CHARITY_IMAGE} alt='charity' />,
+  dining: <img src={DINING_IMAGE} alt='dining' />,
+  entretainment: <img src={ENTRETAINMENT_IMAGE} alt='entretainment' />,
+  groceries: <img src={GROCERIES_IMAGE} alt='groceries' />,
+  living: <img src={LIVING_IMAGE} alt='living' />,
+  social: <img src={SOCIAL_IMAGE} alt='social' />,
+  transportation: <img src={TRANSPOTATION_IMAGE} alt='transportation' />,
+  projects: <img src={PROJECTS_IMAGE} alt='projects' />,
+  default: <div className='icon'>?</div>
+}
+
 export default function Add () {
   const { godSheets } = useGodSheets()
   const [type, setType] = useState('expense')
@@ -92,10 +115,9 @@ function AddExpense({ year }) {
     <div className='text'>amount</div>
     <input type='number' name='amount' value={amount} onChange={e => setAmount(e.target.value)} />
     <div className='text'>type</div>
-    <select name='type' onChange={e => setType(e.target.value)}>
-      <option value=''>select type</option>
-      {expenseTypes(year).map(option => <option value={option}>{option}</option>)}
-    </select>
+    <div className='types'>
+      {expenseTypes(year).map(currentType => <div className={`type-button ${type === currentType ? 'selected' : ''}`} onClick={() => setType(currentType)}>{IMAGES[currentType] || IMAGES.default}</div>)}
+    </div>
     <div className='text'>details</div>
     <textarea name='details' value={details} onChange={e => setDetails(e.target.value)} />
     <div className='done primary button' onClick={add}>add</div>
