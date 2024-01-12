@@ -17,7 +17,11 @@ export default function Home() {
     if (loading) {
       return <div className='loader'><BarLoader color='#2d3f47' loading={true} size={100} /></div>
     }
-    if (Object.keys(godSheets).length === 0) return <FirstYear setLoading={setLoading} />
+    if (Object.keys(godSheets).length === 0)
+      return <AddYear setLoading={setLoading} text={<>
+        <div className='text'>You don't seem to have any connections to yearly godsheets.</div>
+        <div className='text'>Add your first!</div>
+      </>} />
     return <MainMenu setLoading={setLoading} />
   }
 
@@ -30,25 +34,35 @@ export default function Home() {
   </div>
 }
 
-function MainMenu() {
-  return <div style={{ display: 'flex', flexDirection: 'column' }}>
-    <Link to='/add' className='primary button'>add entry</Link>
-    <Link to='/stats' className='button'>dashboard</Link>
+function MainMenu({ setLoading }) {
+  const [showAddYear, setShowAddYear] = useState(false)
+  
+  return <div style={{ height: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <Link to='/add' className='primary button'>add entry</Link>
+      <Link to='/status' className='button'>status</Link>
+      <Link to='/stats' className='button'>dashboard</Link>
+    </div>
+    {showAddYear ?
+      <AddYear setLoading={setLoading} text={<div className='text'>Add a new year</div>} callback={() => setShowAddYear(false)} />
+    :
+      <a href='/#' className='link' onClick={() => setShowAddYear(true)}>add year</a>
+    }
   </div>
 }
 
-function FirstYear({ setLoading }) {
+function AddYear({ setLoading, text, callback }) {
   const [URL, setURL] = useState('')
   const { addYear } = useGodSheets()
   
   const login = async () => {
     setLoading(true)
     await addYear(String(URL))
+    callback()
   }
 
   return <>
-    <div className='text'>You don't seem to have any connections to yearly godsheets.</div>
-    <div className='text'>Add your first!</div>
+    {text}
     <div className='add-year'>
       <input type='text' name='url' value={URL} onChange={e => setURL(e.target.value)} />
       <div className='done icon' onClick={login}><FaCheck /></div>

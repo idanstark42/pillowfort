@@ -4,6 +4,7 @@ import { ToastContainer, Slide } from 'react-toastify'
 import Home from './components/home'
 import Add from './components/add'
 import Stats from './components/stats'
+import Status from './components/status'
 
 import { WithGodSheets } from './components/godsheets-context'
 
@@ -15,6 +16,7 @@ function App() {
     <ToastContainer position='bottom-right' transition={Slide} />
     <Router>
       <Routes>
+        <Route path='/status' element={<Status />} />
         <Route path='/stats' element={<Stats />} />
         <Route path='/add' element={<Add />} />
         <Route path='/' element={<Home />} />

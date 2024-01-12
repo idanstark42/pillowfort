@@ -25,7 +25,7 @@ body::after{
   overflow-y: scroll;
 }
 
-.home, .stats {
+.home, .stats, .status {
   color: var(--main);
   font-family: var(--font);
 }
@@ -53,7 +53,7 @@ body::after{
   text-align: center;
 }
 
-.stats .summary {
+.stats .summary, .status .summary {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -61,18 +61,18 @@ body::after{
   margin: 1rem;
 }
 
-.stats .partials, .stats .total {
+.stats .partials, .stats .total, .status .partials, .status .total {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.stats .partials {
+.stats .partials, .status .partials {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
 
-.stats .total {
+.stats .total, .status .total {
   font-size: 2rem;
   margin-bottom: 2rem;
 }
@@ -80,6 +80,7 @@ body::after{
 .home .add-year {
   width: 80vw;
   display: flex;
+  margin-top: 1rem;
 }
 
 .home .add-year input {
@@ -156,6 +157,18 @@ body::after{
   border: none;
 }
 
+.status {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.status .CircularProgressbar {
+  margin: 1rem;
+  width: calc(80% - 2rem);
+}
+
 .stats {
   width: 100%;
   height: 100%;
@@ -205,6 +218,13 @@ body::after{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.link {
+  color: var(--main);
+  line-height: 2em;
+  font-size: 1.2rem;
+  text-align: center;
 }
 
 .button {

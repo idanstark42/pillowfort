@@ -33,6 +33,8 @@ export default function Add () {
   const { godSheets } = useGodSheets()
   const [type, setType] = useState('expense')
 
+  const currentYear = Object.keys(godSheets).sort((a, b) => b - a)[0]
+
   if (Object.keys(godSheets).length === 0) return <div className='add'>
   </div>
 
@@ -41,10 +43,10 @@ export default function Add () {
     <div className='icon' style={{ position: 'absolute', left: '1rem' }}><Link to='/'><FaArrowLeft style={{ color: 'var(--main)' }} /></Link></div>
     <div className='buttons'>
       {['expense', 'income'].map(currentType =>
-        <div className={`inline button ${type === currentType ? 'primary' : ''}`} onClick={() => setType(currentType)}>{currentType}</div>)}
+        <div key={currentType} className={`inline button ${type === currentType ? 'primary' : ''}`} onClick={() => setType(currentType)}>{currentType}</div>)}
     </div>
     <div style={{ flex: 1, display: 'flex' }}>
-    {type === 'expense' ? <AddExpense year={2023} /> : <AddIncome year={2023} />}
+    {type === 'expense' ? <AddExpense year={currentYear} /> : <AddIncome year={currentYear} />}
     </div>
   </div>
 }
@@ -79,7 +81,7 @@ function AddIncome ({ year }) {
     <div className='text'>profile</div>
     <select name='type' onChange={e => setProfile(e.target.value)}>
       <option value=''>select type</option>
-      {['freelance', 'employee'].map(option => <option value={option}>{option}</option>)}
+      {['freelance', 'employee'].map(option => <option key={option} value={option}>{option}</option>)}
     </select>
     <div className='text'>details</div>
     <textarea name='details' value={details} onChange={e => setDetails(e.target.value)} />
@@ -116,7 +118,7 @@ function AddExpense({ year }) {
     <input type='number' name='amount' value={amount} onChange={e => setAmount(e.target.value)} />
     <div className='text'>type</div>
     <div className='types'>
-      {expenseTypes(year).map(currentType => <div className={`type-button ${type === currentType ? 'selected' : ''}`} onClick={() => setType(currentType)}>{IMAGES[currentType] || IMAGES.default}</div>)}
+      {expenseTypes(year).map(currentType => <div key={currentType} className={`type-button ${type === currentType ? 'selected' : ''}`} onClick={() => setType(currentType)}>{IMAGES[currentType] || IMAGES.default}</div>)}
     </div>
     <div className='text'>details</div>
     <textarea name='details' value={details} onChange={e => setDetails(e.target.value)} />

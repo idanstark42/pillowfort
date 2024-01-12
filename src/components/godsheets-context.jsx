@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react'
+import BarLoader from 'react-spinners/BarLoader'
 import { toast } from 'react-toastify'
 import Cookies from 'js-cookie'
 
@@ -50,11 +51,13 @@ export function WithGodSheets ({ children }) {
   }
 
   const expenseTypes = year => {
-    console.log(godSheets)
-    return godSheets[year].expenses.reduce((types, expense) => {
-      if (!types.includes(expense.type) && expense.type) {
-        types.push(expense.type)
-      }
+    if (!godSheets[year]) return []
+    return godSheets[year].expenseTypes.reduce((types, month) => {
+      Object.keys(month).forEach(key => {
+        if (key && key !== 'month' && !types.includes(key)) {
+          types.push(key)
+        }
+      })
       return types
     }, [])
   }
@@ -76,7 +79,7 @@ export function WithGodSheets ({ children }) {
   }, [years])
 
   if (!godSheets) {
-    return <div className='loading' />
+    return <div className='loader'><BarLoader color='#2d3f47' loading={true} size={100} /></div>
   }
 
   return <GodSheetsContext.Provider value={{ godSheets, addYear, removeYear, addExpense, addIncome, expenseTypes }}>{children}</GodSheetsContext.Provider>
