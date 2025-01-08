@@ -41,7 +41,7 @@ function MainMenu({ setLoading }) {
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
       <Link to='/add' className='primary button'>add entry</Link>
       <Link to='/status' className='button'>status</Link>
-      <Link to='/stats' className='button'>dashboard</Link>
+      <Link to='/stats' className='button'>statistics</Link>
     </div>
     {showAddYear ?
       <AddYear setLoading={setLoading} text={<div className='text'>Add a new year</div>} callback={() => setShowAddYear(false)} />

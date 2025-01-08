@@ -9,20 +9,20 @@ import CountUp from 'react-countup'
 import { useGodSheets } from './godsheets-context'
 
 const EXPENSE_TYPE_COLORS = [
-  { name: 'living', color: '#FF6464' },
-  { name: 'groceries', color: '#FFB764' },
-  { name: 'entretainment', color: '#FFE364' },
-  { name: 'dining', color: '#646464' },
-  { name: 'projects', color: '#6494FF' },
-  { name: 'books', color: '#64FFB9' },
-  { name: 'charity', color: '#64FF64' },
-  { name: 'social', color: '#B9B9B9' },
-  { name: 'transportation', color: '#64FF64' },
+  { name: 'living', color: '#9e0142' },
+  { name: 'groceries', color: '#d53e4f' },
+  { name: 'entretainment', color: '#f46d43' },
+  { name: 'dining', color: '#fdae61' },
+  { name: 'projects', color: '#fee08b' },
+  { name: 'books', color: '#e6f598' },
+  { name: 'charity', color: '#abdda4' },
+  { name: 'social', color: '#66c2a5' },
+  { name: 'transportation', color: '#3288bd' },
 ]
 
 const INCOME_TYPE_COLORS = [
-  { name: 'freelance', color: '#FF6464' },
-  { name: 'employee', color: '#FFB764' }
+  { name: 'freelance', color: '#9e0142' },
+  { name: 'employee', color: '#5e4fa2' }
 ]
 
 export default function Stats () {
